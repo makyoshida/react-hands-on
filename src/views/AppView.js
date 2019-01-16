@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import marked from 'marked';
 import AppActions from '../data/AppActions';
 
 const AppView = props => {
@@ -30,11 +31,13 @@ class Editor extends React.Component {
   }
 }
 
-const Viewer = props => (
-    <div>
-      <p>{props.app.get("text") || ""}</p>
-    </div>
+const Viewer = props => {
+  const text = props.app.get("text") || "";
+
+  return (
+    <div dangerouslySetInnerHTML={{__html: marked(text)}}></div>
     );
+};
 
 export default AppView;
 
